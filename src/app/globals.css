@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =============================================================== */
+
+@theme {
+  /* This replaces the old tailwind.config.ts extend block */
+  @keyframes marquee {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  --animate-marquee: marquee 25s linear infinite;
+}
+
+/* Custom Utility for the Marquee if needed */
+.animate-marquee {
+  animation: var(--animate-marquee);
+}
+
+@theme {
+  --font-display:
+    "Syne", sans-serif; /* Recommended for the REFLECT look [cite: 5] */
+
+  --animate-spin-slow: spin 8s linear infinite;
+}
+
+/* Custom Production Buttons */
+@utility btn-primary {
+  @apply bg-black text-white px-8 py-3 text-[11px] font-bold uppercase tracking-wider rounded-sm transition-all hover:bg-zinc-800;
+}
+
+@utility btn-outline {
+  @apply border border-zinc-300 text-black px-8 py-3 text-[11px] font-bold uppercase tracking-wider rounded-sm transition-all hover:bg-zinc-50;
+}
+
+/* Glassmorphism for the Quick Add buttons [cite: 13] */
+@utility glass-button {
+  @apply bg-white/80 backdrop-blur-md text-black px-6 py-2 text-[10px] font-black uppercase rounded-sm hover:bg-black hover:text-white transition-all;
+}
