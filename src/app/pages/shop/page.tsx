@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { ShoppingBag, Filter } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const products = [
   {
@@ -36,6 +38,7 @@ const products = [
 export default function ShopPage() {
   return (
     <main className="min-h-screen bg-white pt-24 pb-40 px-6 md:px-20">
+      <Navbar />
       {/* SHOP HEADER */}
       <header className="mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-zinc-100 pb-12">
@@ -112,6 +115,7 @@ export default function ShopPage() {
           Enquire Now
         </button>
       </section>
+      <Footer />
     </main>
   );
 }
