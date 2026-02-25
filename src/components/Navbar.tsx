@@ -8,9 +8,9 @@ import { Menu, X, ShoppingBag, Search, User } from "lucide-react";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Shop", href: "/shop" },
-  { name: "Collections", href: "/shop" },
-  { name: "About", href: "#about" },
+  { name: "Shop", href: "/pages/shop" },
+  { name: "Collections", href: "/pages/shop" },
+  { name: "About", href: "/pages/about" },
 ];
 
 export function Navbar() {
