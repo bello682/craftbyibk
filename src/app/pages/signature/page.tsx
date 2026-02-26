@@ -1,155 +1,3 @@
-// "use client";
-
-// import { motion } from "framer-motion";
-// import { Navbar } from "@/components/Navbar";
-// import Footer from "@/components/Footer";
-// import Link from "next/link";
-// import { ArrowUpRight, Star, Anchor } from "lucide-react";
-
-// const signatureProducts = [
-//   {
-//     id: "sig-01",
-//     name: "The Ibk Aviator",
-//     subtitle: "The Founding Silhouette",
-//     price: 450,
-//     imageLabel: "Aviator",
-//     stats: ["12 Hours of Stitching", "Full-Grain Calf", "Hand-Painted Edges"],
-//   },
-//   {
-//     id: "sig-02",
-//     name: "Legacy Tote",
-//     subtitle: "Architectural Utility",
-//     price: 520,
-//     imageLabel: "Tote",
-//     stats: ["Reinforced Base", "Solid Brass Hardware", "Lifetime Warranty"],
-//   },
-//   {
-//     id: "sig-03",
-//     name: "The Lagos Clutch",
-//     subtitle: "Evening Minimalism",
-//     price: 280,
-//     imageLabel: "Clutch",
-//     stats: ["Magnetic Closure", "Silk-lined Interior", "Monogram Ready"],
-//   },
-// ];
-
-// export default function SignatureCollection() {
-//   return (
-//     <div className="min-h-screen bg-white text-black">
-//       <Navbar />
-
-//       <main className="pt-32 pb-20 px-6 md:px-10 lg:px-16 max-w-[1440px] mx-auto">
-//         {/* SECTION HEADER */}
-//         <header className="mb-32">
-//           <div className="flex flex-col md:flex-row justify-between items-end gap-12">
-//             <div className="max-w-4xl">
-//               <span className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-400 block mb-6">
-//                 Established 2024
-//               </span>
-//               <motion.h1
-//                 initial={{ opacity: 0, y: 30 }}
-//                 animate={{ opacity: 1, y: 0 }}
-//                 className="text-[clamp(45px,11vw,130px)] font-black uppercase tracking-tighter leading-[0.85]"
-//               >
-//                 SIGNATURE <br />
-//                 <span className="text-zinc-200">PIECES.</span>
-//               </motion.h1>
-//             </div>
-//             <div className="flex flex-col gap-4 text-right">
-//               <Anchor className="ml-auto text-zinc-300" size={32} />
-//               <p className="max-w-[200px] text-zinc-500 text-[10px] uppercase tracking-widest leading-relaxed">
-//                 The foundational designs that carry our name and our promise of
-//                 longevity.
-//               </p>
-//             </div>
-//           </div>
-//         </header>
-
-//         {/* PRODUCTS GRID */}
-//         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20">
-//           {signatureProducts.map((product, i) => (
-//             <Link
-//               href={`/product/${product.id}`}
-//               key={product.id}
-//               className="group"
-//             >
-//               <motion.div
-//                 initial={{ opacity: 0, y: 20 }}
-//                 whileInView={{ opacity: 1, y: 0 }}
-//                 transition={{ delay: i * 0.1 }}
-//                 viewport={{ once: true }}
-//                 className="space-y-8"
-//               >
-//                 {/* Image Container */}
-//                 <div className="relative aspect-[3/4] bg-zinc-50 rounded-[40px] overflow-hidden">
-//                   <div className="absolute inset-0 flex items-center justify-center text-zinc-200 font-black uppercase text-2xl tracking-[0.5em] group-hover:scale-110 transition-transform duration-700">
-//                     {product.imageLabel}
-//                   </div>
-//                   {/* Star Icon for Signature status */}
-//                   <div className="absolute top-8 right-8 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">
-//                     <Star size={14} className="fill-black" />
-//                   </div>
-//                 </div>
-
-//                 {/* Product Info */}
-//                 <div className="px-2">
-//                   <div className="flex justify-between items-start mb-4">
-//                     <div>
-//                       <h3 className="text-2xl font-black uppercase tracking-tight group-hover:text-zinc-500 transition-colors">
-//                         {product.name}
-//                       </h3>
-//                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-//                         {product.subtitle}
-//                       </p>
-//                     </div>
-//                     <span className="text-xl font-black italic">
-//                       ${product.price}
-//                     </span>
-//                   </div>
-
-//                   {/* Technical Specs - "The Robust Detail" */}
-//                   <div className="pt-6 border-t border-zinc-100 flex flex-wrap gap-x-6 gap-y-2">
-//                     {product.stats.map((stat, idx) => (
-//                       <span
-//                         key={idx}
-//                         className="text-[9px] font-black uppercase tracking-tighter text-zinc-500 flex items-center gap-1"
-//                       >
-//                         <div className="w-1 h-1 bg-zinc-200 rounded-full" />
-//                         {stat}
-//                       </span>
-//                     ))}
-//                   </div>
-//                 </div>
-//               </motion.div>
-//             </Link>
-//           ))}
-//         </section>
-
-//         {/* HERITAGE BLOCK */}
-//         <section className="mt-40 bg-zinc-50 rounded-[60px] p-12 md:p-24 flex flex-col items-center text-center">
-//           <div className="w-px h-24 bg-zinc-200 mb-12" />
-//           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter max-w-2xl leading-none mb-8">
-//             DESIGNED TO OUTLIVE <br /> THE TREND.
-//           </h2>
-//           <p className="max-w-lg text-zinc-500 text-sm uppercase tracking-widest leading-relaxed mb-12">
-//             Our Signature collection ignores the seasonal calendar. These pieces
-//             are refined over years, not months, ensuring they remain relevant
-//             for a lifetime.
-//           </p>
-//           <Link
-//             href="/pages/about"
-//             className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.4em] hover:gap-4 transition-all"
-//           >
-//             Discover our Story <ArrowUpRight size={16} />
-//           </Link>
-//         </section>
-//       </main>
-
-//       <Footer />
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useState } from "react";
@@ -305,10 +153,11 @@ export default function SignatureCollection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
+              // ADDED: overflow-y-auto and items-start so you can scroll on small screens
+              className="fixed inset-0 z-[100] flex items-start md:items-center justify-center p-4 md:p-10 overflow-y-auto"
             >
               <div
-                className="absolute inset-0 bg-black/90 backdrop-blur-xl"
+                className="fixed inset-0 bg-black/90 backdrop-blur-xl"
                 onClick={() => setSelectedProduct(null)}
               />
 
@@ -316,10 +165,12 @@ export default function SignatureCollection() {
                 initial={{ scale: 0.9, y: 50, opacity: 0 }}
                 animate={{ scale: 1, y: 0, opacity: 1 }}
                 exit={{ scale: 0.9, y: 50, opacity: 0 }}
-                className="relative bg-white w-full max-w-6xl rounded-[40px] md:rounded-[60px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-2xl"
+                // ADDED: my-auto ensures it stays centered on desktop but scrollable on mobile
+                className="relative bg-white w-full max-w-6xl rounded-[40px] md:rounded-[60px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-2xl my-auto"
               >
                 <button
                   onClick={() => setSelectedProduct(null)}
+                  // ADDED: sticky and top-4 (or keep absolute) to ensure it stays visible
                   className="absolute top-8 right-8 z-50 bg-black text-white p-3 rounded-full hover:scale-110 transition-transform"
                 >
                   <X size={20} />

@@ -89,13 +89,13 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-black/40" />
 
               {/* Your Text */}
-              <div className="relative z-10 text-zinc-300 font-bold uppercase tracking-[2em] text-sm">
+              <div className="relative z-10 text-zinc-300 font-bold uppercase tracking-[2em] text-sm ">
                 Workshop View
               </div>
             </div>
             {/* Replace with <Image /> */}
           </div>
-          <div className="h-[400px] md:h-[600px] bg-black rounded-3xl flex flex-col justify-end p-10 text-white relative">
+          <div className="h-[400px] md:h-[600px] bg-black rounded-3xl flex flex-col  items-center justify-end  p-10 text-white relative">
             <h3 className="text-2xl font-black uppercase mb-4 leading-tight">
               Authenticity in every stitch.
             </h3>
@@ -135,14 +135,6 @@ export default function AboutPage() {
         </section>
 
         {/* CALL TO ACTION */}
-        {/* <section className="mt-32 bg-zinc-100 rounded-[50px] p-12 md:p-24 text-center">
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-8">
-            Own a piece of <br /> craftsmanship.
-          </h2>
-          <button className="bg-black text-white px-12 py-5 text-xs font-bold uppercase rounded-full hover:scale-105 transition-transform">
-            View Collections
-          </button>
-        </section> */}
         <section className="relative mt-32 overflow-hidden rounded-[50px] p-12 md:p-24 text-center min-h-[500px] flex items-center justify-center">
           {/* Verified Pexels link: Leather bag artisan workshop */}
           <Image

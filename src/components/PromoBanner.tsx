@@ -2,6 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import banner1 from "../../public/images/banner1.png";
+import banner2 from "../../public/images/banner2.png";
+import banner3 from "../../public/images/banner3.png";
+import Image from "next/image";
+import { useGlobalModal } from "./providers/ModalProvider";
 
 const PROMOS = [
   {
@@ -11,7 +16,7 @@ const PROMOS = [
     subtitle: "ALL NEW ARRIVALS",
     desc: "Elevate your collection with our latest artisanal bags. Handcrafted excellence meets contemporary design.",
     button: "Shop The Sale",
-    theme: "#E5E5E5",
+    theme: banner1,
   },
   {
     id: 2,
@@ -20,7 +25,7 @@ const PROMOS = [
     subtitle: "ON ALL GLOBAL ORDERS",
     desc: "Experience luxury without boundaries. We deliver our hand-stitched leather goods to your doorstep, anywhere in the world.",
     button: "View Collections",
-    theme: "#D4D4D4",
+    theme: banner2,
   },
   {
     id: 3,
@@ -29,12 +34,13 @@ const PROMOS = [
     subtitle: "ON TRAVEL ESSENTIALS",
     desc: "Master the art of travel. Secure our premium luggage tags or passport holders when you purchase any travel tote.",
     button: "Claim Offer",
-    theme: "#EAEAEA",
+    theme: banner3,
   },
 ];
 
 export default function PromoBanner() {
   const [index, setIndex] = useState(0);
+  const { openComingSoon } = useGlobalModal();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -46,10 +52,32 @@ export default function PromoBanner() {
   const current = PROMOS[index];
 
   return (
-    <section
-      className="relative w-full py-12 md:py-20 px-6 overflow-hidden transition-colors duration-1000"
-      style={{ backgroundColor: current.theme }}
-    >
+    // <section
+    //   className="relative w-full py-12 md:py-20 px-6 overflow-hidden transition-colors duration-1000"
+    //   // style={{ backgroundColor: current.theme }}
+    // >
+    <section className="relative w-full aspect-[21/9] md:aspect-[3/1] min-h-[300px] max-h-[500px] flex items-center justify-center px-6 overflow-hidden">
+      {/* Dynamic Background Image Layer */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`bg-${current.id}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 z-0"
+        >
+          <Image
+            src={current.theme}
+            alt="Promotion Background"
+            fill
+            className="object-cover brightness-[0.7]" // Brightness helps text pop
+            priority
+          />
+          {/* Subtle overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-black/20" />
+        </motion.div>
+      </AnimatePresence>
       {/* Background Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
         <span className="text-[25vw] font-black uppercase leading-none">
@@ -86,6 +114,7 @@ export default function PromoBanner() {
 
               {/* Call to Action */}
               <motion.button
+                onClick={openComingSoon}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-black text-white px-8 py-4 md:px-10 md:py-5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-[0.4em] transition-all hover:bg-zinc-800 shadow-xl shadow-black/5"

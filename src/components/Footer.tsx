@@ -182,8 +182,8 @@ export default function Footer() {
 
   const footerLinks = {
     shop: [
-      { name: "All Collections", href: "/pages/shop" }, // Existing
-      { name: "Handmade", href: "/pages/shop" }, // Pointed to main shop for now
+      { name: "All Collections", href: "/pages/collections" }, // Existing
+      { name: "Handmade", href: "/pages/handmade" }, // Pointed to main shop for now
       { name: "Signature", href: "/pages/signature" }, // Pointed to main shop for now
       { name: "Limited Edition", href: "/pages/limited" }, // Pointed to main shop for now
     ],
