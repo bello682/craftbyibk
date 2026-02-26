@@ -56,7 +56,8 @@ export default function PromoBanner() {
     //   className="relative w-full py-12 md:py-20 px-6 overflow-hidden transition-colors duration-1000"
     //   // style={{ backgroundColor: current.theme }}
     // >
-    <section className="relative w-full aspect-[21/9] md:aspect-[3/1] min-h-[300px] max-h-[500px] flex items-center justify-center px-6 overflow-hidden">
+    // <section className="relative w-full aspect-[21/9] md:aspect-[3/1] min-h-[300px] max-h-[500px] flex items-center justify-center px-6 overflow-hidden">
+    <section className="relative w-full aspect-video md:aspect-[21/9] lg:aspect-[3/1] min-h-[350px] max-h-[600px] flex items-center justify-center px-6 overflow-hidden">
       {/* Dynamic Background Image Layer */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -67,11 +68,18 @@ export default function PromoBanner() {
           transition={{ duration: 1 }}
           className="absolute inset-0 z-0"
         >
-          <Image
+          {/* <Image
             src={current.theme}
             alt="Promotion Background"
             fill
             className="object-cover brightness-[0.7]" // Brightness helps text pop
+            priority
+          /> */}
+          <Image
+            src={current.theme}
+            alt="Promotion Background"
+            fill
+            className="object-cover object-top brightness-[0.7]" // object-top keeps the logo visible
             priority
           />
           {/* Subtle overlay to ensure text readability */}
