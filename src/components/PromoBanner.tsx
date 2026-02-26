@@ -105,21 +105,18 @@ export default function PromoBanner() {
               className="flex flex-col items-center"
             >
               {/* Tagline */}
-              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-500 mb-4">
+              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.5em] text-white/70 mb-4">
                 {current.tagline}
               </span>
-
               {/* Main Title */}
-              <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-black mb-6">
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-white mb-6">
                 {current.title} <br />
-                <span className="text-zinc-500/60">{current.subtitle}</span>
+                <span className="text-white/40">{current.subtitle}</span>
               </h2>
-
-              {/* Description - Line Clamp for safety */}
-              <p className="max-w-md md:max-w-xl text-[10px] md:text-xs text-zinc-600 uppercase tracking-[0.2em] leading-relaxed mb-8 font-medium line-clamp-2">
+              {/* Description - Line Clamp for safety zinc-600 */}
+              <p className="max-w-md md:max-w-xl text-[10px] md:text-xs text-zinc-200 uppercase tracking-[0.2em] leading-relaxed mb-8 font-medium line-clamp-2">
                 {current.desc}
               </p>
-
               {/* Call to Action */}
               <motion.button
                 onClick={openComingSoon}
