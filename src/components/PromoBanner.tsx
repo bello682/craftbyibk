@@ -57,7 +57,7 @@ export default function PromoBanner() {
     //   // style={{ backgroundColor: current.theme }}
     // >
     // <section className="relative w-full aspect-[21/9] md:aspect-[3/1] min-h-[300px] max-h-[500px] flex items-center justify-center px-6 overflow-hidden">
-    <section className="relative w-full aspect-video md:aspect-[21/9] lg:aspect-[3/1] min-h-[350px] max-h-[600px] flex items-center justify-center px-6 overflow-hidden">
+    <section className="relative w-full max-w-full overflow-x-hidden aspect-video md:aspect-[21/9] lg:aspect-[3/1] min-h-[350px] max-h-[600px] flex items-center justify-center px-6 ">
       {/* Dynamic Background Image Layer */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -87,7 +87,7 @@ export default function PromoBanner() {
         </motion.div>
       </AnimatePresence>
       {/* Background Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none overflow-hidden">
         <span className="text-[25vw] font-black uppercase leading-none">
           OFFER
         </span>
