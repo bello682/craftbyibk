@@ -333,7 +333,7 @@ export const FeatureModal = ({
               {/* NAVIGATION LINKS */}
               <div className="grid grid-cols-2 gap-4">
                 <Link
-                  href="/shop"
+                  href="/pages/shop"
                   onClick={onClose}
                   className="bg-black text-white py-4 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
                 >
