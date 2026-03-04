@@ -65,7 +65,7 @@ export default function PrivacyPolicy() {
             <p>
               For any questions regarding your data, contact us at:{" "}
               <span className="text-black font-bold">
-                studio@craftbyibk.com
+                hello@craft_byibk.com
               </span>
             </p>
           </section>

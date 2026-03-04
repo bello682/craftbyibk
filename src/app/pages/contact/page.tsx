@@ -5,7 +5,14 @@ import Footer from "@/components/Footer";
 import { useDispatch } from "react-redux";
 import { contactUsSendEmail } from "@/lib/store/redux/adminSlice";
 import { AnimatePresence, motion } from "framer-motion";
-import { Mail, Phone, MapPin, ArrowUpRight, Send } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  ArrowUpRight,
+  Send,
+  ArrowRight,
+} from "lucide-react";
 
 export default function ContactPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +46,13 @@ export default function ContactPage() {
       setIsLoading(false);
       setTimeout(() => setStatus(null), 5000); // Auto-hide toast
     }
+  };
+
+  const handleWhatsApp = () => {
+    window.open(
+      `https://wa.me/2348077276464?text=Hello%20Craft_ByIbk`,
+      "_blank",
+    );
   };
   return (
     <div className="min-h-screen bg-white text-black">
@@ -119,14 +133,26 @@ export default function ContactPage() {
             </div>
 
             <div className="flex flex-col gap-8">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-400">
+              {/* <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-400">
                 Studio Address
               </h4>
               <p className="text-xl md:text-2xl text-zinc-600 leading-relaxed max-w-sm font-medium">
                 12 Artisanal Way, <br />
                 Lekki Phase 1, Lagos, <br />
                 Nigeria.
-              </p>
+              </p> */}
+              <div className="bg-zinc-50 rounded-[40px] p-10 flex flex-col justify-between">
+                <p className="text-2xl font-medium leading-tight">
+                  "Every piece we craft is a conversation between the artisan
+                  and the owner. We look forward to starting yours."
+                </p>
+                <button
+                  onClick={handleWhatsApp}
+                  className="mt-12 w-full bg-black text-white py-6 rounded-3xl font-black uppercase text-xs tracking-[0.2em] flex items-center justify-center gap-4 hover:bg-zinc-800 transition-all"
+                >
+                  Start a Conversation <ArrowRight size={18} />
+                </button>
+              </div>
             </div>
           </div>
 
