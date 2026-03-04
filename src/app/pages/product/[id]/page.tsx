@@ -86,8 +86,6 @@ export default function ProductDetail() {
       </div>
     );
 
-  console.log("Backend Details Check:", product?.details);
-
   return (
     <div className="min-h-screen bg-white text-black">
       <Navbar />

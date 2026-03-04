@@ -315,13 +315,13 @@ export default function Footer() {
           </p>
           <div className="flex gap-8">
             <Link
-              href="/contact"
+              href="/pages/privacy"
               className="text-zinc-600 hover:text-zinc-400 text-[9px] uppercase tracking-[0.3em]"
             >
               Privacy
             </Link>
             <Link
-              href="/contact"
+              href="/pages/terms"
               className="text-zinc-600 hover:text-zinc-400 text-[9px] uppercase tracking-[0.3em]"
             >
               Terms
