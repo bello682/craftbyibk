@@ -56,7 +56,7 @@ export default function SustainabilityPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <p className="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-xl uppercase tracking-tight">
-              At CraftByIbk, we don't believe in "Eco-Collections." We believe
+              At Craft_ByIbk, we don't believe in "Eco-Collections." We believe
               that sustainability should be the baseline for every single stitch
               we make. Luxury shouldn't come at the cost of the future.
             </p>

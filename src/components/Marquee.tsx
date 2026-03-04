@@ -7,7 +7,7 @@ export default function Marquee() {
         {[...Array(10)].map((_, i) => (
           <div key={i} className="flex items-center gap-8">
             <span className="text-white text-xl font-black uppercase tracking-tighter">
-              CraftByIbk Fashion
+              Craft_ByIbk Fashion
             </span>
             <Star className="text-white fill-white" size={16} />
           </div>

@@ -48,9 +48,9 @@ export default function SignatureCollection() {
 
   const handleWhatsAppInquiry = (productName: string) => {
     const message = encodeURIComponent(
-      `Hello CraftByIbk, I am viewing your Signature Collection and I am very interested in the "${productName}". Could you provide more details on availability?`,
+      `Hello Craft_ByIbk, I am viewing your Signature Collection and I am very interested in the "${productName}". Could you provide more details on availability?`,
     );
-    window.open(`https://wa.me/2348123456789?text=${message}`, "_blank");
+    window.open(`https://wa.me/2348077276464?text=${message}`, "_blank");
   };
 
   return (

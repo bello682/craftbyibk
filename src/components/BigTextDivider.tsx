@@ -14,7 +14,7 @@ export default function BigTextDivider() {
           {/* Descriptive Text: Small, uppercase, and positioned to the left */}
           <div className="max-w-[280px] md:max-w-xs mb-6 md:mb-2">
             <p className="text-[9px] md:text-[10px] text-zinc-500 uppercase tracking-[0.2em] leading-relaxed font-medium">
-              At CraftByIbk, we offer more than just bags — we provide a
+              At Craft_ByIbk, we offer more than just bags — we provide a
               [cite_start]canvas for your individuality[cite: 1, 4]. Our
               thoughtfully designed artisanal pieces blend style and comfort,
               allowing you to make a statement with every step.

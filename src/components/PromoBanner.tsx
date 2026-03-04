@@ -40,7 +40,7 @@ const PROMOS = [
 
 export default function PromoBanner() {
   const [index, setIndex] = useState(0);
-  const { openComingSoon } = useGlobalModal();
+  const { openComingSoon, closeComingSoon } = useGlobalModal();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -51,13 +51,23 @@ export default function PromoBanner() {
 
   const current = PROMOS[index];
 
+  // Logic to handle the click dynamically
+  const handleButtonClick = () => {
+    if (current.button === "View Collections") {
+      closeComingSoon(); // Ensure it's closed
+      window.location.href = "/pages/collections"; // Navigate
+    } else {
+      openComingSoon(); // Open modal for everything else
+    }
+  };
+
   return (
     // <section
     //   className="relative w-full py-12 md:py-20 px-6 overflow-hidden transition-colors duration-1000"
     //   // style={{ backgroundColor: current.theme }}
     // >
     // <section className="relative w-full aspect-[21/9] md:aspect-[3/1] min-h-[300px] max-h-[500px] flex items-center justify-center px-6 overflow-hidden">
-    <section className="relative w-full max-w-full overflow-x-hidden aspect-video md:aspect-[21/9] lg:aspect-[3/1] min-h-[350px] max-h-[600px] flex items-center justify-center px-6 ">
+    <section className="relative w-full  max-w-full overflow-x-hidden aspect-video md:aspect-[21/9] lg:aspect-[3/1] min-h-[350px] md:min-h-[400px] max-h-[600px] flex items-center justify-center px-6 ">
       {/* Dynamic Background Image Layer */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -68,17 +78,11 @@ export default function PromoBanner() {
           transition={{ duration: 1 }}
           className="absolute inset-0 z-0"
         >
-          {/* <Image
-            src={current.theme}
-            alt="Promotion Background"
-            fill
-            className="object-cover brightness-[0.7]" // Brightness helps text pop
-            priority
-          /> */}
           <Image
             src={current.theme}
             alt="Promotion Background"
             fill
+            sizes=""
             className="object-cover object-top brightness-[0.7]" // object-top keeps the logo visible
             priority
           />
@@ -119,7 +123,8 @@ export default function PromoBanner() {
               </p>
               {/* Call to Action */}
               <motion.button
-                onClick={openComingSoon}
+                // onClick={openComingSoon}
+                onClick={handleButtonClick}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-black text-white px-8 py-4 md:px-10 md:py-5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-[0.4em] transition-all hover:bg-zinc-800 shadow-xl shadow-black/5"

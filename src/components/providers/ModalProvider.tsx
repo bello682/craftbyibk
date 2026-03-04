@@ -5,6 +5,7 @@ import { FeatureModal } from "../../components/comingSoonFeatureGlobalModal"; //
 
 const ModalContext = createContext({
   openComingSoon: () => {},
+  closeComingSoon: () => {},
 });
 
 export const useGlobalModal = () => useContext(ModalContext);
@@ -16,7 +17,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
   const closeComingSoon = () => setIsOpen(false);
 
   return (
-    <ModalContext.Provider value={{ openComingSoon }}>
+    <ModalContext.Provider value={{ openComingSoon, closeComingSoon }}>
       {children}
       <FeatureModal isOpen={isOpen} onClose={closeComingSoon} />
     </ModalContext.Provider>

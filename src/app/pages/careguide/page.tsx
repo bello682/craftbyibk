@@ -46,7 +46,7 @@ export default function CareGuidePage() {
             <span className="text-zinc-200">CARE GUIDE.</span>
           </motion.h1>
           <p className="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-2xl uppercase tracking-tight">
-            A CraftByIbk piece is designed to age with you. Proper care ensures
+            A Craft_ByIbk piece is designed to age with you. Proper care ensures
             the leather develops a rich patina and remains a staple of your
             wardrobe for decades to come.
           </p>

@@ -134,7 +134,7 @@ export default function LimitedEditionPage() {
                       {product.name}
                     </h2>
                     <p className="text-2xl font-black italic text-zinc-300">
-                      ${product.price}
+                      ₦{product.price}
                     </p>
                   </div>
 
@@ -144,7 +144,7 @@ export default function LimitedEditionPage() {
 
                   {product.status === "Available" ? (
                     <Link
-                      // href={`/product/${product.id}`}
+                      // href={`/product/₦{product.id}`}
                       href="#"
                       onClick={openComingSoon}
                       className="inline-flex items-center gap-4 bg-white text-black px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs hover:bg-zinc-200 transition-all group"

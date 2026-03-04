@@ -48,7 +48,7 @@ export default function AboutPage() {
               transition={{ delay: 0.3 }}
               className="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-xl"
             >
-              CraftByIbk was born out of a rebellion against the "fast-fashion"
+              Craft_ByIbk was born out of a rebellion against the "fast-fashion"
               cycle. We believe a bag shouldn't just carry your essentials—it
               should carry the legacy of the hands that made it.
             </motion.p>
@@ -153,7 +153,10 @@ export default function AboutPage() {
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-8 text-black leading-[0.9]">
               Own a piece of <br /> craftsmanship.
             </h2>
-            <button className="bg-black text-white px-12 py-5 text-xs font-bold uppercase rounded-full hover:scale-105 transition-transform cursor-pointer">
+            <button
+              onClick={() => (window.location.href = "/pages/shop")}
+              className="bg-black text-white px-12 py-5 text-xs font-bold uppercase rounded-full hover:scale-105 transition-transform cursor-pointer"
+            >
               View Collections
             </button>
           </div>

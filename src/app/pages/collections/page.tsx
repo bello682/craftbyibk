@@ -165,6 +165,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import craft2 from "../../../../public/images/craft2.png";
 import craft6 from "../../../../public/images/craft6.png";
+import { useGlobalModal } from "@/components/providers/ModalProvider";
 
 const collections = [
   {
@@ -174,7 +175,7 @@ const collections = [
     image: craft6,
     category: "Caps & Bags",
     description:
-      "The foundation of the CraftByIbk wardrobe. Minimalist silhouettes in premium hides.",
+      "The foundation of the Craft_ByIbk wardrobe. Minimalist silhouettes in premium hides.",
   },
   {
     id: "artisan-series",
@@ -228,6 +229,7 @@ const filterOptions = [
 
 export default function AllCollectionsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const { openComingSoon } = useGlobalModal();
 
   return (
     <div className="min-h-screen bg-white">
@@ -291,7 +293,12 @@ export default function AllCollectionsPage() {
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   className="group cursor-pointer"
                 >
-                  <Link href={`/collections/${collection.id}`}>
+                  <div
+                    onClick={() => {
+                      // window.location.href = `/collections/${collection.id}`;
+                      openComingSoon();
+                    }}
+                  >
                     <div className="relative aspect-[3/4] rounded-[40px] overflow-hidden bg-zinc-100 mb-6 transition-all duration-700 group-hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)]">
                       <Image
                         src={collection.image}
@@ -331,7 +338,7 @@ export default function AllCollectionsPage() {
                         <ChevronRight size={18} />
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               ))}
           </AnimatePresence>

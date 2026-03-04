@@ -81,9 +81,9 @@ export default function CraftsmanshipPage() {
             </h2>
             <p className="text-zinc-600 leading-relaxed uppercase tracking-wide text-sm max-w-md">
               Unlike industrial factories, we do not use assembly lines. Every
-              CraftByIbk piece is started and finished by a single artisan. This
-              creates a personal connection between the maker and the owner that
-              mass production can never replicate.
+              Craft_ByIbk piece is started and finished by a single artisan.
+              This creates a personal connection between the maker and the owner
+              that mass production can never replicate.
             </p>
           </div>
           {/* <div className="grid grid-cols-2 gap-4">

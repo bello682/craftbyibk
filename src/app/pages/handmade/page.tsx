@@ -56,7 +56,7 @@ export default function HandmadePage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-400 mb-6 block"
           >
-            The Soul of CraftByIbk
+            The Soul of Craft_ByIbk
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}
@@ -89,9 +89,9 @@ export default function HandmadePage() {
               <span className="text-zinc-300">PERMANENCE.</span>
             </h2>
             <p className="text-zinc-500 text-lg leading-relaxed mb-8">
-              We don&apos;t believe in mass production. Each piece at CraftByIbk
-              is a singular journey from raw hide to finished masterpiece,
-              taking up to 48 hours of focused manual labor.
+              We don&apos;t believe in mass production. Each piece at
+              Craft_ByIbk is a singular journey from raw hide to finished
+              masterpiece, taking up to 48 hours of focused manual labor.
             </p>
             <div className="flex gap-4">
               <div className="bg-zinc-100 p-6 rounded-[30px] flex-1">
@@ -177,7 +177,10 @@ export default function HandmadePage() {
             OWN A PIECE <br /> OF THE{" "}
             <span className="text-zinc-200">ART.</span>
           </h2>
-          <button className="bg-black text-white px-16 py-8 rounded-full font-black uppercase tracking-[0.3em] text-xs hover:scale-105 transition-transform active:scale-95 shadow-2xl">
+          <button
+            onClick={() => (window.location.href = "/pages/shop")}
+            className="bg-black text-white px-16 py-8 rounded-full font-black uppercase tracking-[0.3em] text-xs hover:scale-105 transition-transform active:scale-95 shadow-2xl"
+          >
             Browse The Workshop
           </button>
         </motion.div>

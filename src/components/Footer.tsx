@@ -36,10 +36,10 @@
 //   };
 
 //   const socials = [
-//     { icon: <Facebook size={14} />, href: "https://facebook.com/craftbyibk" },
-//     { icon: <Instagram size={14} />, href: "https://instagram.com/craftbyibk" },
-//     { icon: <Twitter size={14} />, href: "https://twitter.com/craftbyibk" },
-//     { icon: <Youtube size={14} />, href: "https://youtube.com/craftbyibk" },
+//     { icon: <Facebook size={14} />, href: "https://facebook.com/craft_byibk" },
+//     { icon: <Instagram size={14} />, href: "https://instagram.com/craft_byibk" },
+//     { icon: <Twitter size={14} />, href: "https://twitter.com/craft_byibk" },
+//     { icon: <Youtube size={14} />, href: "https://youtube.com/craft_byibk" },
 //     { icon: <MessageCircle size={14} />, href: "https://wa.me/yournumber" },
 //   ];
 
@@ -48,7 +48,7 @@
 //       {/* THE BIG FADED IBK - Background Layer */}
 //       <div className="absolute -bottom-[10%] left-0 w-full pointer-events-none select-none z-0">
 //         <h1 className="text-[28vw] font-black leading-none uppercase tracking-tighter text-zinc-900/40">
-//           CRAFTBYIBK
+//           CRAFT_BYIBK
 //         </h1>
 //         {/* The fade overlay to make it sink into the background toward the right */}
 //         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-black w-full h-full" />
@@ -202,10 +202,13 @@ export default function Footer() {
   };
 
   const socials = [
-    { icon: <Facebook size={14} />, href: "https://facebook.com/craftbyibk" },
-    { icon: <Instagram size={14} />, href: "https://instagram.com/craftbyibk" },
-    { icon: <Twitter size={14} />, href: "https://twitter.com/craftbyibk" },
-    { icon: <Youtube size={14} />, href: "https://youtube.com/craftbyibk" },
+    { icon: <Facebook size={14} />, href: "https://facebook.com/craft_byibk" },
+    {
+      icon: <Instagram size={14} />,
+      href: "https://instagram.com/craft_byibk",
+    },
+    { icon: <Twitter size={14} />, href: "https://twitter.com/craft_byibk" },
+    { icon: <Youtube size={14} />, href: "https://youtube.com/craft_byibk" },
     { icon: <MessageCircle size={14} />, href: "https://wa.me/2348123456789" }, // Added a placeholder Lagos number format
   ];
 
@@ -214,7 +217,7 @@ export default function Footer() {
       {/* THE BIG FADED IBK - Background Layer */}
       <div className="absolute -bottom-[10%] left-0 w-full pointer-events-none select-none z-0">
         <h1 className="text-[28vw] font-black leading-none uppercase tracking-tighter text-zinc-900/40">
-          CRAFTBYIBK
+          CRAFT_BYIBK
         </h1>
         {/* The fade overlay to make it sink into the background toward the right */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-black w-full h-full" />
@@ -225,7 +228,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="flex flex-col gap-6">
             <h2 className="text-2xl font-black tracking-tighter uppercase">
-              CRAFT BY IBK
+              CRAFT_BYIBK
             </h2>
             <p className="text-zinc-500 text-[10px] md:text-xs leading-relaxed uppercase tracking-widest max-w-[240px]">
               Elevating the standard of artisanal leather goods. Each piece is a
@@ -308,7 +311,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-10 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-zinc-600 text-[9px] uppercase tracking-[0.3em]">
-            © {currentYear} CRAFT BY IBK. ALL RIGHTS RESERVED.
+            © {currentYear} CRAFT_BYIBK. ALL RIGHTS RESERVED.
           </p>
           <div className="flex gap-8">
             <Link

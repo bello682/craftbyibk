@@ -84,15 +84,18 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import imageLabel1 from "../../public/images/hero1.png";
+import imageLabel2 from "../../public/images/hero2.png";
+import imageLabel3 from "../../public/images/hero3.png";
 
 const heroSlides = [
   {
     titleFirst: "CRAFTED",
     titleSecond: "FASHION",
     description:
-      "Discover a bag experience that not only mirrors your unique personality but amplifies it. At CraftByIbk, every piece is crafted to elevate your confidence.",
+      "Discover a bag experience that not only mirrors your unique personality but amplifies it. At Craft_ByIbk, every piece is crafted to elevate your confidence.",
     badgeText: "Premium • Handmade",
-    imageLabel: "Main Collection",
+    imageLabel: imageLabel1,
   },
   {
     titleFirst: "SIGNATURE",
@@ -100,7 +103,7 @@ const heroSlides = [
     description:
       "Our signature series focuses on raw textures and timeless durability. Built for the modern professional who values artisanal integrity.",
     badgeText: "Limited • Edition",
-    imageLabel: "Signature Series",
+    imageLabel: imageLabel2,
   },
   {
     titleFirst: "MODERN",
@@ -108,7 +111,7 @@ const heroSlides = [
     description:
       "Clean lines meet exceptional function. Explore our latest drop of minimalist carriers designed to simplify your everyday journey.",
     badgeText: "New • Arrival",
-    imageLabel: "Modern Drop",
+    imageLabel: imageLabel3,
   },
 ];
 
@@ -147,13 +150,44 @@ export default function Hero() {
                 {slide.description}
               </p>
 
-              <div className="flex flex-wrap gap-4">
-                <button className="bg-black text-white px-10 py-4 text-xs font-bold uppercase rounded-sm hover:bg-zinc-800 transition-colors">
-                  Buy Product
-                </button>
-                <button className="border border-zinc-300 text-black px-10 py-4 text-xs font-bold uppercase rounded-sm hover:bg-zinc-50 transition-colors">
-                  Explore Product
-                </button>
+              {/* Brand Status Design - Non-Clickable */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-12 mt-4">
+                {/* Est. Year & Origin */}
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-black">
+                    Est. 2021
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-zinc-400">
+                    Lagos • Nigeria
+                  </span>
+                </div>
+
+                {/* Vertical Divider (Hidden on mobile stack) */}
+                <div className="hidden sm:block w-[1px] h-10 bg-zinc-200" />
+
+                {/* Craftsmanship Guarantee */}
+                <div className="flex items-center gap-4">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-black">
+                      100% Hand-Stitched
+                    </span>
+                    <div className="mt-2 w-full h-[2px] bg-black" />
+                  </div>
+
+                  {/* Minimalist Iconography */}
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="black"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -172,7 +206,12 @@ export default function Hero() {
             >
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-200">
                 <span className="text-zinc-400 font-black uppercase tracking-widest text-lg">
-                  {slide.imageLabel}
+                  <Image
+                    src={slide.imageLabel}
+                    alt="Craft Process"
+                    fill
+                    className="object-cover"
+                  />
                 </span>
                 <span className="text-zinc-400 italic text-sm text-center px-4">
                   Cycle Slide {current + 1} of {heroSlides.length}
