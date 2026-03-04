@@ -2,6 +2,7 @@
 // import { Geist, Geist_Mono } from "next/font/google";
 // import "./globals.css";
 // import { ModalProvider } from "@/components/providers/ModalProvider";
+// import { ReduxProvider } from "@/components/providers/ReduxProvider"; // Import here
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -29,7 +30,9 @@
 //         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 //         suppressHydrationWarning={true}
 //       >
-//         <ModalProvider>{children}</ModalProvider>
+//         <ReduxProvider>
+//           <ModalProvider>{children}</ModalProvider>
+//         </ReduxProvider>
 //       </body>
 //     </html>
 //   );
@@ -39,7 +42,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ModalProvider } from "@/components/providers/ModalProvider";
-import { ReduxProvider } from "@/components/providers/ReduxProvider"; // Import here
+import { ReduxProvider } from "@/components/providers/ReduxProvider";
+import Script from "next/script"; // Import this for Ads
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,6 +67,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Replace ca-pub-XXXXXXXXXXXXXXXX with your real ID once you sign up */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning={true}
