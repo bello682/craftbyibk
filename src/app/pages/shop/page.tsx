@@ -336,7 +336,7 @@ const ProductionAd = () => {
       <ins
         className="adsbygoogle"
         style={{ display: "block" }}
-        data-ad-client="ca-pub-ca-pub-3730534578729256"
+        data-ad-client="ca-pub-3730534578729256"
         data-ad-slot="8995547678"
         data-ad-format="auto"
         data-full-width-responsive="true"
