@@ -335,7 +335,13 @@ const ProductionAd = () => {
       {/* REAL AD UNIT SLOT */}
       <ins
         className="adsbygoogle"
-        style={{ display: "block" }}
+        style={{
+          display: "inline-block",
+          width: "100%",
+          height: "100%",
+          minWidth: "250px",
+          minHeight: "250px",
+        }}
         data-ad-client="ca-pub-3730534578729256"
         data-ad-slot="8995547678"
         data-ad-format="auto"
