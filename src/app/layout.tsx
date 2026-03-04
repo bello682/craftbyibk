@@ -56,8 +56,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CraftByIbk | Objects of Permanence",
+  title: "Craft_ByIbk | Objects of Permanence",
   description: "Minimalist essentials designed for every occasion.",
+  other: {
+    "google-adsense-account": "ca-pub-3730534578729256",
+  },
 };
 
 export default function RootLayout({
@@ -67,17 +70,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* ADD THIS: The Meta Tag is the easiest for the Crawler to find */}
-        <meta name="google-adsense-account" content="ca-pub-3730534578729256" />
-      </head>
-
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning={true}
       >
-        {/* Replace ca-pub-XXXXXXXXXXXXXXXX with your real ID once you sign up */}
-        {/* MOVE SCRIPT HERE: Outside of head, Next.js handles it better */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730534578729256"
