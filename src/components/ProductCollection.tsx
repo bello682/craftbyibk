@@ -128,15 +128,17 @@ export default function ProductCollection() {
         )}
       </div>
 
-      <div className="mt-20 flex justify-center">
-        <Link
-          href="/pages/shop"
-          className="group flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] bg-zinc-50 px-10 py-5 rounded-full hover:bg-black hover:text-white transition-all"
-        >
-          {/* Explore All {masterProducts.length} Objects */}
-          View Full Collection
-        </Link>
-      </div>
+      {loading ? null : (
+        <div className="mt-20 flex justify-center">
+          <Link
+            href="/pages/shop"
+            className="group flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] bg-zinc-50 px-10 py-5 rounded-full hover:bg-black hover:text-white transition-all"
+          >
+            {/* Explore All {masterProducts.length} Objects */}
+            View Full Collection
+          </Link>
+        </div>
+      )}
 
       {/* View All CTA */}
       {/* <div className="mt-20 flex justify-center">
