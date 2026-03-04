@@ -71,7 +71,7 @@ export default function RootLayout({
         {/* Replace ca-pub-XXXXXXXXXXXXXXXX with your real ID once you sign up */}
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730534578729256"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />

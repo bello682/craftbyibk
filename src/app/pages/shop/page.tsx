@@ -284,64 +284,66 @@ import { getAllCategoryData } from "@/lib/store/redux/adminSlice";
 import Link from "next/link";
 
 // --- NEW: AD COMPONENT (Minimalist & Production Ready) ---
-const ProductionAd = () => {
-  return (
-    <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] border border-zinc-100 p-8 flex flex-col justify-between overflow-hidden group/ad hover:bg-zinc-100 transition-colors duration-500">
-      <div className="space-y-4 relative z-10">
-        <span className="text-[8px] font-black uppercase tracking-[0.4em] text-zinc-400 bg-white px-3 py-1 rounded-full border border-zinc-100">
-          Sponsored Partner
-        </span>
-        <h4 className="text-2xl font-black uppercase tracking-tighter leading-none text-black">
-          The Art of <br /> Timeless <br /> Design
-        </h4>
-        <p className="text-[10px] text-zinc-500 uppercase tracking-widest leading-relaxed font-medium">
-          Discover curated essentials that complement the Craft_ByIbk aesthetic.
-        </p>
-      </div>
-
-      <div className="relative z-10">
-        <button className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest border-b-2 border-black pb-1 group-hover/ad:gap-4 transition-all">
-          Explore Now <ExternalLink size={12} />
-        </button>
-      </div>
-
-      {/* Subtle Background Pattern */}
-      <div className="absolute -right-4 -bottom-4 opacity-5 group-hover/ad:opacity-10 transition-opacity">
-        <ShoppingBag size={200} strokeWidth={1} />
-      </div>
-    </div>
-  );
-};
-
-// FOR REAL LIFE ADS INTEGRATION:
 // const ProductionAd = () => {
-//   useEffect(() => {
-//     try {
-//       // This line triggers the actual ad to load from the internet
-//       (window.adsbygoogle = window.adsbygoogle || []).push({});
-//     } catch (e) {
-//       console.error("Ad failed to load", e);
-//     }
-//   }, []);
-
 //   return (
-//     <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] overflow-hidden flex items-center justify-center">
-//       <p className="absolute top-2 left-4 text-[8px] text-zinc-300 uppercase tracking-widest">
-//         Advertisement
-//       </p>
+//     <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] border border-zinc-100 p-8 flex flex-col justify-between overflow-hidden group/ad hover:bg-zinc-100 transition-colors duration-500">
+//       <div className="space-y-4 relative z-10">
+//         <span className="text-[8px] font-black uppercase tracking-[0.4em] text-zinc-400 bg-white px-3 py-1 rounded-full border border-zinc-100">
+//           Sponsored Partner
+//         </span>
+//         <h4 className="text-2xl font-black uppercase tracking-tighter leading-none text-black">
+//           The Art of <br /> Timeless <br /> Design
+//         </h4>
+//         <p className="text-[10px] text-zinc-500 uppercase tracking-widest leading-relaxed font-medium">
+//           Discover curated essentials that complement the Craft_ByIbk aesthetic.
+//         </p>
+//       </div>
 
-//       {/* REAL AD UNIT SLOT */}
-//       <ins
-//         className="adsbygoogle"
-//         style={{ display: "block" }}
-//         data-ad-client="ca-pub-YOUR_ID_HERE"
-//         data-ad-slot="YOUR_SLOT_ID"
-//         data-ad-format="auto"
-//         data-full-width-responsive="true"
-//       ></ins>
+//       <div className="relative z-10">
+//         <button className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest border-b-2 border-black pb-1 group-hover/ad:gap-4 transition-all">
+//           Explore Now <ExternalLink size={12} />
+//         </button>
+//       </div>
+
+//       {/* Subtle Background Pattern */}
+//       <div className="absolute -right-4 -bottom-4 opacity-5 group-hover/ad:opacity-10 transition-opacity">
+//         <ShoppingBag size={200} strokeWidth={1} />
+//       </div>
 //     </div>
 //   );
 // };
+
+// FOR REAL LIFE ADS INTEGRATION:
+const ProductionAd = () => {
+  useEffect(() => {
+    try {
+      // We cast window to 'any' so TypeScript doesn't complain
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
+        {},
+      );
+    } catch (e) {
+      console.error("Ad failed to load", e);
+    }
+  }, []);
+
+  return (
+    <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] overflow-hidden flex items-center justify-center">
+      <p className="absolute top-2 left-4 text-[8px] text-zinc-300 uppercase tracking-widest">
+        Advertisement
+      </p>
+
+      {/* REAL AD UNIT SLOT */}
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block" }}
+        data-ad-client="ca-pub-ca-pub-3730534578729256"
+        data-ad-slot="8995547678"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+    </div>
+  );
+};
 
 export default function ShopPage() {
   const dispatch = useDispatch();

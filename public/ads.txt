@@ -1,2 +1,1 @@
-Inside that file, paste the line Google gives you (it usually looks like this):
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-3730534578729256, DIRECT, f08c47fec0942fa0
