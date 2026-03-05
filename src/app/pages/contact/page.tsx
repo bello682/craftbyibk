@@ -226,9 +226,18 @@ export default function ContactPage() {
                 ></textarea>
               </div>
 
-              <button className="bg-black text-white w-full py-6 mt-4 font-black uppercase tracking-widest text-xs hover:bg-zinc-800 transition-all rounded-full flex items-center justify-center gap-2 cursor-pointer">
-                Send Message <Send size={14} />
-              </button>
+              {isLoading ? (
+                <button
+                  disabled
+                  className="bg-gray-500 text-gray-300 w-full py-6 mt-4 font-black uppercase tracking-widest text-xs cursor-not-allowed"
+                >
+                  Please wait...
+                </button>
+              ) : (
+                <button className="bg-black text-white w-full py-6 mt-4 font-black uppercase tracking-widest text-xs hover:bg-zinc-800 transition-all rounded-full flex items-center justify-center gap-2 cursor-pointer">
+                  Send Message <Send size={14} />
+                </button>
+              )}
             </form>
           </motion.div>
         </div>
