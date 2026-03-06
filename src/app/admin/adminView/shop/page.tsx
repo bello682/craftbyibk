@@ -108,6 +108,20 @@ export default function ShopPage() {
       className="p-4 md:p-10 lg:p-16"
     >
       <div className="max-w-5xl mx-auto">
+        {/* Action Section */}
+        <AnimatePresence mode="wait">
+          {status && (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className={`px-8 py-4 border-2 font-black text-[10px] tracking-[0.2em] uppercase shadow-xl ${status.type === "success" ? "bg-black text-white border-black" : "bg-white text-red-600 border-red-600"}`}
+            >
+              {status.msg}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>

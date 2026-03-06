@@ -34,7 +34,16 @@ export default function NotificationPage() {
   } | null>(null);
 
   useEffect(() => {
+    // 1. Initial fetch on mount
     dispatch(getNotifications() as any);
+
+    // 2. Set up background auto-update every 5 seconds
+    const interval = setInterval(() => {
+      dispatch(getNotifications() as any);
+    }, 5000);
+
+    // 3. Clean up the interval when leaving the page to prevent memory leaks
+    return () => clearInterval(interval);
   }, [dispatch]);
 
   const handlePush = async (e: React.FormEvent) => {
@@ -94,6 +103,18 @@ export default function NotificationPage() {
       className="p-4 md:p-10 lg:p-16  bg-zinc-50 min-h-screen"
     >
       <div className="max-w-5xl mx-auto">
+        <AnimatePresence>
+          {status && (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`mt-4 text-[10px] font-black uppercase tracking-widest ${status.type === "success" ? "text-emerald-600" : "text-red-600"}`}
+            >
+              {status.msg}
+            </motion.p>
+          )}
+        </AnimatePresence>
+
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>

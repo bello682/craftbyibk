@@ -94,6 +94,18 @@ export default function CollectionsPage() {
       className="p-4 md:p-10 lg:p-16"
     >
       <div className="max-w-5xl mx-auto">
+        <AnimatePresence mode="wait">
+          {status && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className={`px-6 py-3 border-2 font-black text-[10px] tracking-[0.2em] uppercase shadow-lg ${status.type === "success" ? "bg-black text-white border-black" : "bg-white text-red-600 border-red-600"}`}
+            >
+              {status.msg}
+            </motion.div>
+          )}
+        </AnimatePresence>
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>

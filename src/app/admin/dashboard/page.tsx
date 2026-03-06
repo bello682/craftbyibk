@@ -159,7 +159,7 @@ import {
   Activity,
   X,
 } from "lucide-react";
-import Sidebar from "../admin/component/adminSideBar";
+import Sidebar from "../component/adminSideBar";
 
 export default function Dashboard() {
   const dispatch = useDispatch();

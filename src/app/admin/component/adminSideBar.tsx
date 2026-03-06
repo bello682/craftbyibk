@@ -154,7 +154,7 @@ import {
 } from "lucide-react";
 
 const menuItems = [
-  { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   {
     name: "Collections",
     href: "/admin/adminView/collections",

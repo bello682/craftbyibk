@@ -1,17 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import API from "@/utils/axiosInstance";
 
-const BASE_URL =
-  // process.env.NEXT_PUBLIC_API_URL || "http://localhost:8026/Api_Url";
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://craftbyibk-nodejs-api-backend.onrender.com/Api_Url";
+const BASE_URL = "http://localhost:8026/Api_Url";
+// process.env.NEXT_PUBLIC_API_URL || "http://localhost:8026/Api_Url";
+// process.env.NEXT_PUBLIC_API_URL ||
+// "https://craftbyibk-nodejs-api-backend.onrender.com/Api_Url";
 
 // --- PRODUCT ACTIONS ---
 export const uploadCollectionsProduct = createAsyncThunk(
   "admin/uploadCollections",
   async (formData: FormData, thunkAPI) => {
     try {
-      const res = await axios.post(
+      const res = await API.post(
         `${BASE_URL}/adminUploadImages/upload/collections`,
         formData,
       );
@@ -26,7 +26,7 @@ export const uploadShopProduct = createAsyncThunk(
   "admin/uploadShop",
   async (formData: FormData, thunkAPI) => {
     try {
-      const res = await axios.post(
+      const res = await API.post(
         `${BASE_URL}/adminUploadImages/upload/shop`,
         formData,
       );
@@ -41,7 +41,7 @@ export const uploadOtherProduct = createAsyncThunk(
   "admin/uploadOther",
   async (formData: FormData, thunkAPI) => {
     try {
-      const res = await axios.post(
+      const res = await API.post(
         `${BASE_URL}/adminUploadImages/upload/other`,
         formData,
       );
@@ -56,7 +56,7 @@ export const getAllCategoryData = createAsyncThunk(
   "admin/getAllData",
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get(`${BASE_URL}/adminUploadImages/all-products`);
+      const res = await API.get(`${BASE_URL}/adminUploadImages/all-products`);
       return res.data;
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.response.data.message);
@@ -69,7 +69,7 @@ export const createNotification = createAsyncThunk(
   "admin/createNotif",
   async (data: any, thunkAPI) => {
     try {
-      const res = await axios.post(
+      const res = await API.post(
         `${BASE_URL}/notificationMessages/notifications`,
         data,
       );
@@ -84,7 +84,7 @@ export const getNotifications = createAsyncThunk(
   "admin/getNotifs",
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get(
+      const res = await API.get(
         `${BASE_URL}/notificationMessages/notifications/get`,
       );
       return res.data;
@@ -98,9 +98,7 @@ export const deleteNotification = createAsyncThunk(
   "admin/deleteNotif",
   async (id: string, thunkAPI) => {
     try {
-      await axios.delete(
-        `${BASE_URL}/notificationMessages/notifications/${id}`,
-      );
+      await API.delete(`${BASE_URL}/notificationMessages/notifications/${id}`);
       return id;
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.response.data.message);
@@ -113,7 +111,7 @@ export const contactUsSendEmail = createAsyncThunk(
   "admin/sendEmail",
   async (data: any, thunkAPI) => {
     try {
-      const res = await axios.post(
+      const res = await API.post(
         `${BASE_URL}/adminUploadImages/contact-us`,
         data,
       );
@@ -129,7 +127,7 @@ export const subscribeToNewsletter = createAsyncThunk(
   "admin/subscribeNewsletter",
   async (email: string, thunkAPI) => {
     try {
-      const res = await axios.post(
+      const res = await API.post(
         `${BASE_URL}/adminUploadImages/newsletter/subscribe`,
         { email },
       );
@@ -145,7 +143,7 @@ export const deleteProductsAction = createAsyncThunk(
   "admin/deleteProducts",
   async ({ ids, category }: { ids: string[]; category: string }, thunkAPI) => {
     try {
-      await axios.delete(`${BASE_URL}/adminUploadImages/delete-products`, {
+      await API.delete(`${BASE_URL}/adminUploadImages/delete-products`, {
         data: { productIds: ids, categoryType: category },
       });
       return { ids, category };
