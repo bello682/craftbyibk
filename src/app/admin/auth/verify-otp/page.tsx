@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   verifyOTP,
   resendOTP,
+  clearMessages,
 } from "../../../../lib/store/redux/adminAuthSlice";
 import { AppDispatch, RootState } from "../../../../lib/store/store";
 import { motion } from "framer-motion";
@@ -70,6 +71,13 @@ export default function VerifyOTPPage() {
       toast.error("Email not found. Please try again.");
     }
   };
+
+  useEffect(() => {
+    dispatch(clearMessages());
+    // If you want to force loading to false on mount, you can create
+    // a specific 'resetLoading' action in your slice, but the
+    // Matcher fix above usually solves this.
+  }, [dispatch]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">

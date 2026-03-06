@@ -154,21 +154,32 @@ const authSlice = createSlice({
         state.loading = false;
         state.successMessage = action.payload.message;
       })
-      // Global Matchers for Loading and Error
+      // 2. SCOPED Matcher for Loading (Start)
       .addMatcher(
-        (action) => action.type.endsWith("/pending"),
+        (action) =>
+          action.type.startsWith("auth/") && action.type.endsWith("/pending"),
         (state) => {
           state.loading = true;
           state.error = null;
           state.successMessage = null;
         },
       )
+      // 3. SCOPED Matcher for Errors (Rejected)
       .addMatcher(
-        (action) => action.type.endsWith("/rejected"),
+        (action) =>
+          action.type.startsWith("auth/") && action.type.endsWith("/rejected"),
         (state, action: PayloadAction<string>) => {
-          // Add PayloadAction<string> here
           state.loading = false;
           state.error = action.payload || "An unexpected error occurred";
+        },
+      )
+
+      // 4. SCOPED Matcher to Turn Off Loading (Fulfilled)
+      .addMatcher(
+        (action) =>
+          action.type.startsWith("auth/") && action.type.endsWith("/fulfilled"),
+        (state) => {
+          state.loading = false;
         },
       );
   },

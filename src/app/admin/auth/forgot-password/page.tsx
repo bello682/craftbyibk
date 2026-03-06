@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,7 +9,6 @@ import {
 import { AppDispatch, RootState } from "../../../../lib/store/store";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function ForgotPasswordPage() {
@@ -31,6 +31,13 @@ export default function ForgotPasswordPage() {
       }, 2000);
     }
   };
+
+  useEffect(() => {
+    dispatch(clearMessages());
+    // If you want to force loading to false on mount, you can create
+    // a specific 'resetLoading' action in your slice, but the
+    // Matcher fix above usually solves this.
+  }, [dispatch]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">

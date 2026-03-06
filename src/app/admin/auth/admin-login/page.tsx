@@ -1,13 +1,17 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAdmin } from "../../../../lib/store/redux/adminAuthSlice";
+import {
+  clearMessages,
+  loginAdmin,
+} from "../../../../lib/store/redux/adminAuthSlice";
 import { AppDispatch, RootState } from "../../../../lib/store/store";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Lock, UserPlus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast"; // 🍞 Toast import
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm();
@@ -37,6 +41,13 @@ export default function LoginPage() {
       });
     }
   };
+
+  useEffect(() => {
+    dispatch(clearMessages());
+    // If you want to force loading to false on mount, you can create
+    // a specific 'resetLoading' action in your slice, but the
+    // Matcher fix above usually solves this.
+  }, [dispatch]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">
@@ -100,7 +111,7 @@ export default function LoginPage() {
                 Signing In...
               </span>
             ) : (
-              "Enter Dashboard"
+              "Sign In"
             )}
           </button>
         </form>

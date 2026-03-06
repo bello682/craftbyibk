@@ -1,11 +1,15 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { registerAdmin } from "../../../../lib/store/redux/adminAuthSlice";
+import {
+  clearMessages,
+  registerAdmin,
+} from "../../../../lib/store/redux/adminAuthSlice";
 import { AppDispatch, RootState } from "../../../../lib/store/store";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function RegisterPage() {
   const {
@@ -23,6 +27,13 @@ export default function RegisterPage() {
       router.push("/admin/auth/verify-otp");
     }
   };
+
+  useEffect(() => {
+    dispatch(clearMessages());
+    // If you want to force loading to false on mount, you can create
+    // a specific 'resetLoading' action in your slice, but the
+    // Matcher fix above usually solves this.
+  }, [dispatch]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">
