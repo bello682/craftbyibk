@@ -10,6 +10,7 @@ import { AppDispatch, RootState } from "../../../../lib/store/store";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ForgotPasswordPage() {
   const { register, handleSubmit, watch } = useForm();
@@ -26,9 +27,23 @@ export default function ForgotPasswordPage() {
     if (forgotPassword.fulfilled.match(result)) {
       // Store email locally so Reset Password page knows who to verify
       localStorage.setItem("resetEmail", data.email);
+
+      // SUCCESS
+      toast.success(
+        `OTP sent to ${result.payload.admin?.fullName! || "Admin otp sent!"}!`,
+        {
+          style: { borderRadius: "15px", background: "#18181b", color: "#fff" },
+        },
+      );
+
       setTimeout(() => {
         router.push("/admin/auth/reset-password");
       }, 2000);
+    } else {
+      // ERROR
+      toast.error((result.payload as string) || "Invalid Credentials", {
+        style: { borderRadius: "15px" },
+      });
     }
   };
 
@@ -41,6 +56,30 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">
+      {/* This renders the toast notifications */}
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
+
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-red-500 text-sm italic"
+          >
+            {error}
+          </motion.p>
+        )}
+        {successMessage && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-emerald-600 text-sm font-medium"
+          >
+            {successMessage} Redirecting...
+          </motion.p>
+        )}
+      </AnimatePresence>
+
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -62,27 +101,6 @@ export default function ForgotPasswordPage() {
               className="w-full px-5 py-4 bg-zinc-50 border border-zinc-200 rounded-2xl outline-none focus:ring-2 focus:ring-black transition-all"
             />
           </div>
-
-          <AnimatePresence>
-            {error && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-red-500 text-sm italic"
-              >
-                {error}
-              </motion.p>
-            )}
-            {successMessage && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-emerald-600 text-sm font-medium"
-              >
-                {successMessage} Redirecting...
-              </motion.p>
-            )}
-          </AnimatePresence>
 
           <button
             disabled={loading}
