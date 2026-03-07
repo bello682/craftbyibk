@@ -69,20 +69,40 @@ export const loginAdmin = createAsyncThunk(
   },
 );
 
+// export const forgotPassword = createAsyncThunk(
+//   "auth/forgotPassword",
+//   async (email: string, thunkAPI) => {
+//     try {
+//       const res = await API.post("/adminAuth/forgot-password", { email });
+//       // SAVE EMAIL FOR RESET PAGE
+//       if (typeof window !== "undefined") {
+//         localStorage.setItem("resetEmail", email);
+//       }
+//       return res.data;
+//     } catch (err: any) {
+//       return thunkAPI.rejectWithValue(
+//         err.response?.data?.message || "Error processing request",
+//       );
+//     }
+//   },
+// );
 export const forgotPassword = createAsyncThunk(
   "auth/forgotPassword",
   async (email: string, thunkAPI) => {
     try {
       const res = await API.post("/adminAuth/forgot-password", { email });
-      // SAVE EMAIL FOR RESET PAGE
-      if (typeof window !== "undefined") {
-        localStorage.setItem("resetEmail", email);
-      }
       return res.data;
     } catch (err: any) {
-      return thunkAPI.rejectWithValue(
-        err.response?.data?.message || "Error processing request",
-      );
+      // DEBUG LOGS - These show up in your BROWSER console
+      console.log("Axios Error Object:", err);
+      console.log("Response Data:", err.response?.data);
+
+      const errorMessage =
+        err.response?.data?.message ||
+        err.message || // e.g., "Network Error" or "timeout"
+        "Server is waking up, please try again in a minute.";
+
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   },
 );
