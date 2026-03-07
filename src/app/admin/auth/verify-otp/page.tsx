@@ -5,6 +5,7 @@ import {
   verifyOTP,
   resendOTP,
   clearMessages,
+  logout,
 } from "../../../../lib/store/redux/adminAuthSlice";
 import { AppDispatch, RootState } from "../../../../lib/store/store";
 import { motion } from "framer-motion";
@@ -56,6 +57,10 @@ export default function VerifyOTPPage() {
 
     const result = await dispatch(verifyOTP({ email, otp: otpString }));
     if (verifyOTP.fulfilled.match(result)) {
+      // 1. CLEAR THE REDUX STATE IMMEDIATELY
+      // This prevents AdminLayout from seeing 'isVerified: true' and redirecting to Dashboard
+      dispatch(logout());
+
       // Clean up storage after successful verification
       localStorage.removeItem("pendingEmail");
 

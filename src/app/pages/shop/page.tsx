@@ -50,20 +50,29 @@ import Link from "next/link";
 
 // FOR REAL LIFE ADS INTEGRATION:
 const ProductionAd = () => {
+  const adRef = React.useRef<boolean>(false);
+
   useEffect(() => {
+    // 1. Prevent double-calling in Strict Mode or re-renders
+    if (adRef.current) return;
+
     try {
-      // We cast window to 'any' so TypeScript doesn't complain
-      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
-        {},
-      );
+      // 2. Only push if the global object exists and the component is mounted
+      if (typeof window !== "undefined" && (window as any).adsbygoogle) {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
+          {},
+        );
+        adRef.current = true;
+      }
     } catch (e) {
-      console.error("Ad failed to load", e);
+      // It's normal for this to catch errors in dev mode if ads are blocked
+      console.warn("AdSense push ignored or failed:", e);
     }
   }, []);
 
   return (
-    <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] overflow-hidden flex items-center justify-center">
-      <p className="absolute top-2 left-4 text-[8px] text-zinc-300 uppercase tracking-widest">
+    <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] overflow-hidden flex items-center justify-center border border-zinc-100">
+      <p className="absolute top-4 left-4 text-[8px] text-zinc-300 uppercase tracking-widest z-10">
         Advertisement
       </p>
 
@@ -71,11 +80,9 @@ const ProductionAd = () => {
       <ins
         className="adsbygoogle"
         style={{
-          display: "inline-block",
+          display: "block",
           width: "100%",
           height: "100%",
-          minWidth: "250px",
-          minHeight: "250px",
         }}
         data-ad-client="ca-pub-3730534578729256"
         data-ad-slot="8995547678"
