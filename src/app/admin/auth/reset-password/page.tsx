@@ -9,6 +9,7 @@ import {
 import { AppDispatch, RootState } from "../../../../lib/store/store";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ResetPasswordPage() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -46,7 +47,24 @@ export default function ResetPasswordPage() {
     const result = await dispatch(resetPassword(payload));
     if (resetPassword.fulfilled.match(result)) {
       localStorage.removeItem("resetEmail");
-      router.push("/admin/auth/login");
+      // router.push("/admin/auth/admin-login");
+
+      // SUCCESS
+      toast.success(
+        `Password reset successful, ${result.payload.admin?.fullName || "Admin password reset successful"}!`,
+        {
+          style: { borderRadius: "15px", background: "#18181b", color: "#fff" },
+        },
+      );
+
+      // The token is already set in localStorage by the Thunk logic
+      // We give the toast a moment to breathe before redirecting
+      setTimeout(() => router.push("/admin/auth/admin-login"), 1500);
+    } else {
+      // ERROR
+      toast.error((result.payload as string) || "Invalid Credentials", {
+        style: { borderRadius: "15px" },
+      });
     }
   };
 
@@ -59,6 +77,8 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">
+      {/* This renders the toast notifications */}
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

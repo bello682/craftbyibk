@@ -76,7 +76,7 @@ export const forgotPassword = createAsyncThunk(
       const res = await API.post("/adminAuth/forgot-password", { email });
       // SAVE EMAIL FOR RESET PAGE
       if (typeof window !== "undefined") {
-        localStorage.setItem("pendingEmail", email);
+        localStorage.setItem("resetEmail", email);
       }
       return res.data;
     } catch (err: any) {
@@ -130,6 +130,7 @@ const authSlice = createSlice({
       .addCase(loginAdmin.fulfilled, (state, action) => {
         state.admin = action.payload.admin;
         state.token = action.payload.token;
+        state.isVerified = true;
         state.loading = false;
       })
       .addCase(verifyOTP.fulfilled, (state, action) => {

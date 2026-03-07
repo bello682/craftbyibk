@@ -22,6 +22,7 @@ export default function LoginPage() {
   const onSubmit = async (data: any) => {
     const result = await dispatch(loginAdmin(data));
 
+    // setTimeout(() => router.push("/admin/dashboard"), 1500);
     if (loginAdmin.fulfilled.match(result)) {
       // SUCCESS
       toast.success(
@@ -52,7 +53,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">
       {/* This renders the toast notifications */}
-      <Toaster position="top-center" reverseOrder={false} />
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
 
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
