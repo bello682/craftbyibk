@@ -53,21 +53,38 @@ export default function AdminLayout({
         "/admin/auth/reset-password",
       ];
       const isPublicRoute = publicRoutes.includes(pathname);
-      const isVerifyRoute = pathname === "/admin/auth/verify-otp"; // Fixed path consistency
+      const isVerifyRoute = pathname === "/admin/auth/verify-otp";
 
-      // 1. No Token? Send to login
+      // --- 1. HYDRATION GUARD ---
+      // If we have a token but Redux says isVerified is false, and we are NOT on the verify page,
+      // we stop here and wait for Redux to finish loading from storage.
+      if (token && !isVerified && !isPublicRoute && !isVerifyRoute) {
+        return;
+      }
+
+      // --- 2. REDIRECT LOGIC ---
+
+      // Case A: No Token? Send to login (unless already on a public/verify page)
       if (!token && !isPublicRoute && !isVerifyRoute) {
         router.replace("/admin/auth/admin-login");
-      }
-      // 2. Has Token but not verified? Send to OTP
-      else if (token && !isVerified && !isVerifyRoute && !isPublicRoute) {
-        router.replace("/admin/auth/verify-otp");
-      }
-      // 3. Fully Authenticated? Prevent access to Auth pages
-      else if (token && isVerified && (isPublicRoute || isVerifyRoute)) {
-        router.replace("/admin/dashboard"); // Ensure this matches your dashboard path
+        return;
       }
 
+      // Case B: Has Token but strictly not verified? Send to OTP page
+      // (Only triggers if Case A failed and the Hydration Guard is passed)
+      if (token && isVerified === false && !isVerifyRoute && !isPublicRoute) {
+        router.replace("/admin/auth/verify-otp");
+        return;
+      }
+
+      // Case C: Fully Authenticated? Prevent them from seeing login/register/verify
+      if (token && isVerified === true && (isPublicRoute || isVerifyRoute)) {
+        router.replace("/admin/dashboard");
+        return;
+      }
+
+      // --- 3. ALL CHECKS PASSED ---
+      // If we reach this point, the user is exactly where they are supposed to be.
       setIsChecking(false);
     };
 
