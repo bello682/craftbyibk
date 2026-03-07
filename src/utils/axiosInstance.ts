@@ -19,11 +19,11 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL:
-    process.env.NEXT_PUBLIC_API_URL ||
-    "https://craftbyibk-nodejs-api-backend.onrender.com/Api_Url",
-  // timeout: 40000,
-  // "http://localhost:8026/Api_Url",
-  // process.env.NEXT_PUBLIC_API_URL || "http://localhost:8026/Api_Url";
+    //   process.env.NEXT_PUBLIC_API_URL ||
+    //   "https://craftbyibk-nodejs-api-backend.onrender.com/Api_Url",
+    // timeout: 40000,
+    "http://localhost:8026/Api_Url",
+  // process.env.NEXT_PUBLIC_API_URL || "http://localhost:8026/Api_Url",
 });
 
 // 1. Request Interceptor: Attach token if it exists

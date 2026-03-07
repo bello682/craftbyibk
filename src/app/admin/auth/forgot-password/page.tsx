@@ -30,7 +30,7 @@ export default function ForgotPasswordPage() {
 
       // SUCCESS
       toast.success(
-        `OTP sent to ${result.payload.admin?.fullName! || "Admin otp sent!"}!`,
+        `Reset password OTP sent to ${result.payload.admin?.fullName! || "Admin Reset password otp sent!"}!`,
         {
           style: { borderRadius: "15px", background: "#18181b", color: "#fff" },
         },

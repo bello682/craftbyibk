@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function RegisterPage() {
   const {
@@ -24,7 +25,22 @@ export default function RegisterPage() {
   const onSubmit = async (data: any) => {
     const result = await dispatch(registerAdmin(data));
     if (registerAdmin.fulfilled.match(result)) {
-      router.push("/admin/auth/verify-otp");
+      // SUCCESS
+      toast.success(
+        `OTP sent to ${result.payload.admin?.fullName! || "Admin otp sent!"}!`,
+        {
+          style: { borderRadius: "15px", background: "#18181b", color: "#fff" },
+        },
+      );
+
+      setTimeout(() => {
+        router.push("/admin/auth/verify-otp");
+      }, 2000);
+    } else {
+      // ERROR
+      toast.error((result.payload as string) || "Invalid Credentials", {
+        style: { borderRadius: "15px" },
+      });
     }
   };
 
@@ -37,6 +53,9 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">
+      {/* This renders the toast notifications */}
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

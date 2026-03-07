@@ -58,7 +58,23 @@ export default function VerifyOTPPage() {
     if (verifyOTP.fulfilled.match(result)) {
       // Clean up storage after successful verification
       localStorage.removeItem("pendingEmail");
-      router.push("/admin/dashboard");
+
+      // SUCCESS
+      toast.success(
+        `Verification Successful ${result.payload.admin?.fullName! || "Verification Successful! Please login"}!`,
+        {
+          style: { borderRadius: "15px", background: "#18181b", color: "#fff" },
+        },
+      );
+
+      setTimeout(() => {
+        router.push("/admin/auth/admin-login");
+      }, 2000);
+    } else {
+      // ERROR
+      toast.error((result.payload as string) || "Invalid Credentials", {
+        style: { borderRadius: "15px" },
+      });
     }
   };
 
@@ -67,8 +83,15 @@ export default function VerifyOTPPage() {
       typeof window !== "undefined" ? localStorage.getItem("pendingEmail") : "";
     if (email) {
       dispatch(resendOTP(email));
+      // SUCCESS
+      toast.success("OTP resent successfully! Please check your email.", {
+        style: { borderRadius: "15px", background: "#18181b", color: "#fff" },
+      });
     } else {
-      toast.error("Email not found. Please try again.");
+      // ERROR
+      toast.error("Email not found. Please try again.", {
+        style: { borderRadius: "15px" },
+      });
     }
   };
 
@@ -81,6 +104,8 @@ export default function VerifyOTPPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 px-4">
+      {/* This renders the toast notifications */}
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
