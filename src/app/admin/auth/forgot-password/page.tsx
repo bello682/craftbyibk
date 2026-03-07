@@ -59,27 +59,6 @@ export default function ForgotPasswordPage() {
       {/* This renders the toast notifications */}
       {/* <Toaster position="top-center" reverseOrder={false} /> */}
 
-      <AnimatePresence>
-        {error && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-red-500 text-sm italic"
-          >
-            {error}
-          </motion.p>
-        )}
-        {successMessage && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-emerald-600 text-sm font-medium"
-          >
-            {successMessage} Redirecting...
-          </motion.p>
-        )}
-      </AnimatePresence>
-
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -101,6 +80,27 @@ export default function ForgotPasswordPage() {
               className="w-full px-5 py-4 bg-zinc-50 border border-zinc-200 rounded-2xl outline-none focus:ring-2 focus:ring-black transition-all"
             />
           </div>
+
+          <AnimatePresence>
+            {error && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-red-500 text-sm italic"
+              >
+                {error}
+              </motion.p>
+            )}
+            {successMessage && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-emerald-600 text-sm font-medium"
+              >
+                {successMessage} Redirecting...
+              </motion.p>
+            )}
+          </AnimatePresence>
 
           <button
             disabled={loading}
