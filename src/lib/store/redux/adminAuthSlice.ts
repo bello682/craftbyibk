@@ -110,14 +110,22 @@ const authSlice = createSlice({
     loading: false,
     successMessage: null as string | null,
     error: null as string | null,
-    isVerified: false,
+    // FIX 1: Ensure this correctly pulls from storage on reload
+    isVerified:
+      typeof window !== "undefined"
+        ? localStorage.getItem("isAdminVerified") === "true"
+        : false,
   },
   reducers: {
     logout: (state) => {
-      localStorage.removeItem("adminToken");
       state.admin = null;
       state.token = null;
       state.isVerified = false;
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("adminToken");
+        localStorage.removeItem("isAdminVerified");
+        localStorage.removeItem("pendingEmail");
+      }
     },
     clearMessages: (state) => {
       state.error = null;
@@ -126,19 +134,30 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Handle Login & OTP success
+      // FIX 2: Handle Login Success - MUST save to localStorage
       .addCase(loginAdmin.fulfilled, (state, action) => {
         state.admin = action.payload.admin;
         state.token = action.payload.token;
         state.isVerified = true;
         state.loading = false;
+
+        if (typeof window !== "undefined") {
+          localStorage.setItem("adminToken", action.payload.token);
+          localStorage.setItem("isAdminVerified", "true"); // CRITICAL FIX
+        }
       })
+      // FIX 3: Handle OTP Success (Already mostly correct in your snippet)
       .addCase(verifyOTP.fulfilled, (state, action) => {
         state.isVerified = true;
         state.token = action.payload.token;
+        state.admin = action.payload.admin;
         state.loading = false;
+
+        if (typeof window !== "undefined") {
+          localStorage.setItem("adminToken", action.payload.token);
+          localStorage.setItem("isAdminVerified", "true"); // CRITICAL FIX
+        }
       })
-      // Handle Success Messages for OTP/Password Resets
       .addCase(registerAdmin.fulfilled, (state, action) => {
         state.loading = false;
         state.successMessage = action.payload.message;
