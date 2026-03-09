@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import API from "@/utils/axiosInstance";
 
 const BASE_URL =
-  // process.env.NEXT_PUBLIC_API_URL ||
-  // "https://craftbyibk-nodejs-api-backend.onrender.com/Api_Url";
-  // "http://localhost:8026/Api_Url";
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8026/Api_Url";
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://craftbyibk-nodejs-api-backend.onrender.com/Api_Url";
+// "http://localhost:8026/Api_Url";
+// process.env.NEXT_PUBLIC_API_URL || "http://localhost:8026/Api_Url";
 
 // --- PRODUCT ACTIONS ---
 export const uploadCollectionsProduct = createAsyncThunk(
