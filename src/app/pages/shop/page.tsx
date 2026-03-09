@@ -19,59 +19,90 @@ import { getAllCategoryData } from "@/lib/store/redux/adminSlice";
 import Link from "next/link";
 
 // --- NEW: AD COMPONENT (Minimalist & Production Ready) ---
+
+// FOR REAL LIFE ADS INTEGRATION:
 // const ProductionAd = () => {
+//   const adRef = React.useRef<boolean>(false);
+
+//   useEffect(() => {
+//     // 1. Prevent double-calling in Strict Mode or re-renders
+//     if (adRef.current) return;
+
+//     try {
+//       // 2. Only push if the global object exists and the component is mounted
+//       if (typeof window !== "undefined" && (window as any).adsbygoogle) {
+//         ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
+//           {},
+//         );
+//         adRef.current = true;
+//       }
+//     } catch (e) {
+//       // It's normal for this to catch errors in dev mode if ads are blocked
+//       console.warn("AdSense push ignored or failed:", e);
+//     }
+//   }, []);
+
 //   return (
-//     <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] border border-zinc-100 p-8 flex flex-col justify-between overflow-hidden group/ad hover:bg-zinc-100 transition-colors duration-500">
-//       <div className="space-y-4 relative z-10">
-//         <span className="text-[8px] font-black uppercase tracking-[0.4em] text-zinc-400 bg-white px-3 py-1 rounded-full border border-zinc-100">
-//           Sponsored Partner
-//         </span>
-//         <h4 className="text-2xl font-black uppercase tracking-tighter leading-none text-black">
-//           The Art of <br /> Timeless <br /> Design
-//         </h4>
-//         <p className="text-[10px] text-zinc-500 uppercase tracking-widest leading-relaxed font-medium">
-//           Discover curated essentials that complement the Craft_ByIbk aesthetic.
-//         </p>
-//       </div>
+//     <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] overflow-hidden flex items-center justify-center border border-zinc-100">
+//       <p className="absolute top-4 left-4 text-[8px] text-zinc-300 uppercase tracking-widest z-10">
+//         Advertisement
+//       </p>
 
-//       <div className="relative z-10">
-//         <button className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest border-b-2 border-black pb-1 group-hover/ad:gap-4 transition-all">
-//           Explore Now <ExternalLink size={12} />
-//         </button>
-//       </div>
-
-//       {/* Subtle Background Pattern */}
-//       <div className="absolute -right-4 -bottom-4 opacity-5 group-hover/ad:opacity-10 transition-opacity">
-//         <ShoppingBag size={200} strokeWidth={1} />
-//       </div>
+//       {/* REAL AD UNIT SLOT */}
+//       <ins
+//         className="adsbygoogle"
+//         style={{
+//           display: "block",
+//           width: "100%",
+//           height: "100%",
+//         }}
+//         data-ad-client="ca-pub-3730534578729256"
+//         data-ad-slot="8995547678"
+//         data-ad-format="auto"
+//         data-full-width-responsive="true"
+//       ></ins>
 //     </div>
 //   );
 // };
 
-// FOR REAL LIFE ADS INTEGRATION:
 const ProductionAd = () => {
-  const adRef = React.useRef<boolean>(false);
+  const adRef = React.useRef<HTMLDivElement>(null);
+  const pushedRef = React.useRef<boolean>(false);
 
   useEffect(() => {
-    // 1. Prevent double-calling in Strict Mode or re-renders
-    if (adRef.current) return;
+    // Only run on client
+    if (typeof window === "undefined") return;
 
-    try {
-      // 2. Only push if the global object exists and the component is mounted
-      if (typeof window !== "undefined" && (window as any).adsbygoogle) {
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
-          {},
-        );
-        adRef.current = true;
+    const initializeAd = () => {
+      // Check if the container actually has width now
+      if (
+        adRef.current &&
+        adRef.current.offsetWidth > 0 &&
+        !pushedRef.current
+      ) {
+        try {
+          if ((window as any).adsbygoogle) {
+            ((window as any).adsbygoogle =
+              (window as any).adsbygoogle || []).push({});
+            pushedRef.current = true;
+          }
+        } catch (e) {
+          console.warn("AdSense error:", e);
+        }
       }
-    } catch (e) {
-      // It's normal for this to catch errors in dev mode if ads are blocked
-      console.warn("AdSense push ignored or failed:", e);
-    }
+    };
+
+    // Give the browser 100ms to calculate the layout grid width
+    const timer = setTimeout(initializeAd, 150);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] overflow-hidden flex items-center justify-center border border-zinc-100">
+    <div
+      ref={adRef}
+      className="relative aspect-[3/4] bg-zinc-50 rounded-[30px] overflow-hidden flex items-center justify-center border border-zinc-100"
+    >
       <p className="absolute top-4 left-4 text-[8px] text-zinc-300 uppercase tracking-widest z-10">
         Advertisement
       </p>
@@ -83,6 +114,7 @@ const ProductionAd = () => {
           display: "block",
           width: "100%",
           height: "100%",
+          minWidth: "250px", // Adding a min-width helps AdSense calculations
         }}
         data-ad-client="ca-pub-3730534578729256"
         data-ad-slot="8995547678"
