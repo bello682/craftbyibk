@@ -43,3 +43,5 @@ export default function Home() {
     </div>
   );
 }
+
+// NEXT_PUBLIC_API_URL="http://localhost:8026/Api_Url"
