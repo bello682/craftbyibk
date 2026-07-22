@@ -17,6 +17,9 @@ import {
   Truck,
   RotateCcw,
   Heart,
+  Lock,
+  X,
+  CreditCard,
 } from "lucide-react";
 
 export default function ProductDetail() {
@@ -27,6 +30,7 @@ export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("details");
   const [currentUrl, setCurrentUrl] = useState("");
   const [isDescModalOpen, setIsDescModalOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   // Get data from Redux
   const { allProducts } = useSelector((state: any) => state.admin);
@@ -281,11 +285,12 @@ export default function ProductDetail() {
 
               {/* QUANTITY & PLACE ORDER */}
               <div className="flex flex-col gap-4 py-8 border-y border-zinc-100">
-                <div className="flex items-center gap-6">
-                  <div className="flex items-center border border-zinc-200 rounded-full px-4 py-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                  {/* Quantity Counter */}
+                  <div className="flex items-center justify-between sm:justify-start border border-zinc-200 rounded-full px-4 py-3">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="hover:text-zinc-400"
+                      className="hover:text-zinc-400 transition-colors"
                     >
                       <Minus size={16} />
                     </button>
@@ -294,19 +299,30 @@ export default function ProductDetail() {
                     </span>
                     <button
                       onClick={() => setQuantity(quantity + 1)}
-                      className="hover:text-zinc-400"
+                      className="hover:text-zinc-400 transition-colors"
                     >
                       <Plus size={16} />
                     </button>
                   </div>
+
+                  {/* Original WhatsApp Button (Restored Exactly as standard) */}
                   <button
                     onClick={handleWhatsAppOrder}
-                    className="flex-1 bg-black text-white py-5 rounded-full font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all active:scale-95"
+                    className="flex-1 bg-black text-white py-4 px-6 rounded-full font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all active:scale-95"
                   >
                     <MessageCircle size={18} fill="white" />
                     Place Your Order Now
                   </button>
                 </div>
+
+                {/* Button to open the Slide-in Checkout Drawer */}
+                <button
+                  onClick={() => setIsCheckoutOpen(true)}
+                  className="w-full border-2 border-black text-black py-3.5 rounded-full font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-all active:scale-95"
+                >
+                  <Lock size={14} />
+                  Or Pay Direct via Card / Checkout
+                </button>
               </div>
 
               {/* TABS */}
@@ -490,7 +506,205 @@ export default function ProductDetail() {
         </div>
       </main>
 
+      {/* ==========================================
+    3. SLIDE-IN CHECKOUT DRAWER & BACKDROP
+    Place this right before <Footer /> at the bottom of your returned JSX
+    ========================================== */}
+      <AnimatePresence>
+        {isCheckoutOpen && (
+          <>
+            {/* Dark Overlay Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsCheckoutOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
+            />
+
+            {/* Slide-out Sidebar Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 h-full w-full max-w-lg bg-white z-[110] shadow-2xl flex flex-col overflow-hidden"
+            >
+              {/* --- DRAWER HEADER --- */}
+              <div className="flex items-center justify-between p-6 md:p-8 border-b border-zinc-100">
+                <div>
+                  <p className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-400">
+                    Craft_ByIbk
+                  </p>
+                  <h2 className="text-2xl font-black uppercase tracking-tighter">
+                    Checkout & Payment
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setIsCheckoutOpen(false)}
+                  className="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* --- DRAWER SCROLLABLE BODY --- */}
+              <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-10 custom-scrollbar">
+                {/* Order Summary Preview Card */}
+                <div className="flex gap-4 items-center bg-zinc-50 p-4 rounded-2xl border border-zinc-100">
+                  <div className="relative w-16 h-20 rounded-xl overflow-hidden bg-zinc-200 flex-shrink-0">
+                    <Image
+                      src={product.frontImageView}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-[11px] font-black uppercase tracking-widest line-clamp-1">
+                      {product.name}
+                    </h4>
+                    <p className="text-[10px] text-zinc-500 uppercase font-bold mt-1">
+                      Qty: {quantity}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-black italic">
+                      ₦{((product.price || 0) * quantity).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Real-world Payment Inputs Form */}
+                <form
+                  className="space-y-8"
+                  onSubmit={(e) => e.preventDefault()}
+                >
+                  {/* Section A: Contact Information */}
+                  <div className="space-y-4">
+                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">
+                      1. Contact Information
+                    </h3>
+                    <input
+                      type="email"
+                      placeholder="Email Address"
+                      className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Phone Number"
+                      className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                    />
+                  </div>
+
+                  {/* Section B: Shipping Details */}
+                  <div className="space-y-4">
+                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">
+                      2. Shipping Address
+                    </h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <input
+                        type="text"
+                        placeholder="First Name"
+                        className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Last Name"
+                        className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Delivery Address"
+                      className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                    />
+                    <div className="grid grid-cols-2 gap-4">
+                      <input
+                        type="text"
+                        placeholder="City"
+                        className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                      />
+                      <input
+                        type="text"
+                        placeholder="State"
+                        className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Section C: Card Details */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">
+                        3. Card Payment
+                      </h3>
+                      <CreditCard size={14} className="text-zinc-400" />
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Card Number"
+                      className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                    />
+                    <div className="grid grid-cols-2 gap-4">
+                      <input
+                        type="text"
+                        placeholder="MM / YY"
+                        className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                      />
+                      <input
+                        type="text"
+                        placeholder="CVC"
+                        className="w-full border-b border-zinc-200 py-3 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-zinc-300"
+                      />
+                    </div>
+                  </div>
+                </form>
+
+                {/* Section D: Direct WhatsApp Chat Alternative Notice & Action */}
+                <div className="bg-zinc-100 p-6 rounded-3xl space-y-3 border border-zinc-200">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-zinc-600">
+                    Prefer to finalize directly?
+                  </p>
+                  <p className="text-[11px] text-zinc-500 leading-relaxed uppercase tracking-wide">
+                    If you prefer not to pay online right now, you can chat
+                    directly with our team on WhatsApp to confirm availability,
+                    arrange custom delivery, or complete your order.
+                  </p>
+                  <button
+                    onClick={handleWhatsAppOrder}
+                    className="w-full bg-emerald-600 text-white py-3.5 px-4 rounded-full font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 hover:bg-emerald-700 transition-colors"
+                  >
+                    <MessageCircle size={16} fill="white" />
+                    Chat With Admin on WhatsApp
+                  </button>
+                </div>
+              </div>
+
+              {/* --- DRAWER STICKY FOOTER --- */}
+              <div className="p-6 md:p-8 bg-zinc-50 border-t border-zinc-200">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
+                    Total Due
+                  </span>
+                  <span className="text-2xl font-black italic">
+                    ₦{((product.price || 0) * quantity).toLocaleString()}
+                  </span>
+                </div>
+                <button className="w-full bg-black text-white py-5 rounded-full font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all active:scale-95 shadow-xl">
+                  <Lock size={16} fill="white" />
+                  Complete Secure Payment
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       <Footer />
     </div>
   );
 }
+
+// now that i have that what next and i see that the page is getting jumpard with many code might be overwhelming for reading sake, how can i split it and have every thing work fine

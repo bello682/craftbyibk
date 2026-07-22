@@ -45,3 +45,5 @@ export default function Home() {
 }
 
 // NEXT_PUBLIC_API_URL="http://localhost:8026/Api_Url"
+// NEXT_PUBLIC_API_URL=https://craftbyibk-nodejs-api-backend.onrender.com/Api_Url
+// NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY=pk_live_1e3f5b8c2a1b4e5d6f7g8h9i0j1k2l3m
